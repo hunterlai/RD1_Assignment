@@ -1,14 +1,13 @@
 <?php
-header("content-type: text/html; charset=utf-8");
-if(isset($_POST["okbtn"])){
-    // echo "ok";
-    $location=$_POST["location"];
-    $_SESSION["location"]=$location;
-    $_SESSION["datetime"]=date("Y-m-d H:i:s");
-}
+// header("content-type: text/html; charset=utf-8");
+
 $location=$_SESSION["location"];
 $date=$_SESSION["datetime"];
+$tormd=date("Y-m-d H:i:s" ,strtotime("1 day"));
+$acqd=date("Y-m-d H:i:s" ,strtotime("2 day"));
 
+
+// echo "$tormd"."<br>$acqd";
 // 1. 初始設定
 $ch = curl_init();
 $url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=CWB-B49B9DCF-7BB9-4300-8452-B146577EE1AE&locationName=$location&elementName=WeatherDescription";
@@ -25,12 +24,36 @@ curl_close($ch);
 $result=file_get_contents($url);
 $array = json_decode($result,true);
 
-    for($i=1;$i<24;$i++){
+// var_dump($array);
+// echo"$date";
+    for($i=0;$i<24;$i++){
         $start=$array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][$i]["startTime"];
         $end=$array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][$i]["endTime"];
+        // echo "date:"."$date"."<br>start:"."$start"."<br>"."$end";
+        
         if($date>$start && $date<$end){
-            echo $array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][$i]["elementValue"][0]["value"];
+            $narr = explode("。",$array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][$i]["elementValue"][0]["value"]);
+            foreach($narr as $key => $val){
+                    echo("$narr[$key]<br>");
+            }
+            // for ($x=0;$x<6;$x++){
+            //     echo $narr[$x]."<br>";
+            // }
         }
+
+        if($tormd>$start && $tormd<$end){
+            $narr = explode("。",$array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][$i]["elementValue"][0]["value"]);
+            foreach($narr as $key => $val){
+                echo("$narr[$key]<br>");
+            }
+        }
+        if($acqd>$start && $acqd<$end){
+            $narr = explode("。",$array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][$i]["elementValue"][0]["value"]);
+            foreach($narr as $key => $val){
+                echo("$narr[$key]<br>");
+            }
+        }
+
     }         
 
 // echo $array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][0]["elementValue"][0]["value"];

@@ -2,7 +2,17 @@
 ini_set ( 'date.timezone' , 'Asia/Taipei' );  
 date_default_timezone_set('Asia/Taipei');
 session_start();
-    require "test.php";
+$location="";
+$_SESSION["datetime"]=date("Y-m-d H:i:s");
+
+if(isset($_POST["location"])){
+    $location = $_POST["location"];
+    $_SESSION["location"]=$location;
+}else{
+    $_SESSION["location"]="臺北市";
+}
+
+// require_once "test.php";
 // if(isset($_POST["okbtn2"])){
 //     // echo "ok";
 //     $location=$_POST["location"];
@@ -25,7 +35,7 @@ session_start();
 </head>
 <body>
     <form method="post">
-        <select name= "location" class="form-control">
+        <select name= "location" class="form-control" onchange="this.form.submit()">
             <optgroup label="北部">
             <option <?php if($location== '臺北市'){echo "selected";}?> >臺北市</option>
             <option <?php if($location== '新北市'){echo "selected";}?> >新北市</option>
@@ -59,10 +69,10 @@ session_start();
             <option <?php if($location== '澎湖縣'){echo "selected";}?> >澎湖縣</option>
             </optgroup>
         </select>
-        <input type="submit" name="okbtn"></input>
-        <input type="submit" name="okbtn2"></input>
+        <input type="submit" name="okbtn" value="未來一周"></input>
+        
     </form>
-    
+    <?php require "test.php"?>
     
     
 </body>
