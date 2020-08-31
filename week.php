@@ -1,9 +1,8 @@
 <?php
-// header("content-type: text/html; charset=utf-8");
 
 $location=$_SESSION["location"];
 $date=$_SESSION["datetime"];
-$weekd=date("Y-m-d H:i:s" ,strtotime("1 week"));
+// $weekd=date("Y-m-d H:i:s" ,strtotime("1 week"));
 
 
 // echo "$tormd"."<br>$acqd";
@@ -25,7 +24,6 @@ $array = json_decode($result,true);
 
 // var_dump($array);
 // echo"$date";
-    echo"未來一周:<br>";
     for($i=0;$i<14;$i++){
         $start=$array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][$i]["startTime"];
         $end=$array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][$i]["endTime"];
