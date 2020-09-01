@@ -1,0 +1,62 @@
+create table city( 
+    cityId int auto_increment primary key NOT null,
+     cityName varchar(10),
+      pic blob 
+);
+
+INSERT INTO city (cityName) VALUES ("雲林縣"),("南投縣"),("連江縣"),("臺東縣"),("金門縣"),("宜蘭縣"),("屏東縣"),("苗栗縣"),("澎湖縣"),("臺北市"),("新竹縣"),("花蓮縣"),("高雄市"),("彰化縣"),("新竹市"),("新北市"),("基隆市"),("臺中市"),("臺南市"),("桃園市"),("嘉義縣"),("嘉義市");
+
+drop tabel twoday;
+create table twoday (
+    cityName varchar(10),
+    startT datetime,
+    endT datetime,
+    domain int ,
+    wx varchar(20),
+    pop varchar(10),
+    t varchar(10),
+    ci varchar(20),
+    ws varchar(30),
+    rh varchar(10)
+);
+drop table week;
+create table week (
+    cityName varchar(10),
+    startT datetime,
+    endT datetime,
+    domain int ,
+    wx varchar(20),
+    pop varchar(10),
+    t varchar(20),
+    ci varchar(20)
+);
+drop table rain;
+create table rain (
+    city varchar(20),
+    localName varchar(20),
+    town varchar(20),
+    rain double(10,4),
+    hour_24 double(10,4)
+);
+雲
+南投
+連江
+臺東
+金門
+宜蘭
+屏東
+苗栗
+澎湖
+台北
+新卒線
+花蓮縣
+高雄市
+彰化縣
+新卒事
+新北市
+基隆市
+台中市
+台南市
+桃園市
+嘉義縣
+嘉義市

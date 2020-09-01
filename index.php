@@ -3,21 +3,19 @@ ini_set ( 'date.timezone' , 'Asia/Taipei' );
 date_default_timezone_set('Asia/Taipei');
 
 session_start();
-require_once("insert.php");
+
+
 $location="";
 $_SESSION["datetime"]=date("Y-m-d H:i:s");
-
 if(isset($_POST["location"])){
     $location = $_POST["location"];
     $_SESSION["location"]=$location;
 }else{
     $_SESSION["location"]="臺北市";
 }
-
-// if(isset($_POST["okbtn"])){
-//     $location = $_POST["location"];
-//     $_SESSION["location"]=$location;
-// }
+// require "insert.php";
+require "raininsert.php";
+// require "weekinsert.php";
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +81,7 @@ if(isset($_POST["location"])){
 						<option <?php if($location== '澎湖縣'){echo "selected";}?> >澎湖縣</option>
 						</optgroup>
 					</select>
-					<!-- <a href="insert.php">insert</a> -->
+					<button type="submit"><a href="rain.php">rain</a></button>
 					
 				</form>
 			</div>
@@ -96,6 +94,7 @@ if(isset($_POST["location"])){
 					<li class="nav-item">
 						<a class="nav-link " href="#tab2" data-toggle="tab">未來一周</a>
 					</li>
+					
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="tab1" >
@@ -165,8 +164,136 @@ if(isset($_POST["location"])){
 					<div class="tab-pane" id="tab2">
 						<p>
 							<?php require "week.php"?>
+							<div class="row">
+							<div class="col-md-3">
+								<div class="card">
+									<div class="card-block">
+										<h5 class="card-title">
+											<?php echo $row_0["wx"];?>
+										</h5>
+										<p class="card-text">
+											<?php echo $row_0["pop"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_0["t"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_0["ci"];?>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="card">
+									<div class="card-block">
+										<h5 class="card-title">
+											<?php echo $row_1["wx"];?>
+										</h5>
+										<p class="card-text">
+											<?php echo $row_1["pop"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_1["t"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_1["ci"];?>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="card">
+									<div class="card-block">
+										<h5 class="card-title">
+											<?php echo $row_2["wx"];?>
+										</h5>
+										<p class="card-text">
+											<?php echo $row_2["pop"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_2["t"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_2["ci"];?>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="card">
+									<div class="card-block">
+										<h5 class="card-title">
+											<?php echo $row_3["wx"];?>
+										</h5>
+										<p class="card-text">
+											<?php echo $row_3["pop"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_3["t"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_3["ci"];?>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="card">
+									<div class="card-block">
+										<h5 class="card-title">
+											<?php echo $row_4["wx"];?>
+										</h5>
+										<p class="card-text">
+											<?php echo $row_4["pop"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_4["t"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_4["ci"];?>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="card">
+									<div class="card-block">
+										<h5 class="card-title">
+											<?php echo $row_5["wx"];?>
+										</h5>
+										<p class="card-text">
+											<?php echo $row_5["pop"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_5["t"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_5["ci"];?>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="card">
+									<div class="card-block">
+										<h5 class="card-title">
+											<?php echo $row_6["wx"];?>
+										</h5>
+										<p class="card-text">
+											<?php echo $row_6["pop"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_6["t"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_6["ci"];?>
+										</p>
+									</div>
+								</div>
+							</div>
 						</p>
 					</div>
+					
 				</div>
 			</div>
 			
