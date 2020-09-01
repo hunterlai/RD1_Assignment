@@ -32,7 +32,20 @@ require "raininsert.php";
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+	<style type="text/css">
+	.jumbotron{
+		padding:10rem 2rem;
+	}
+	.resize {
+		width : auto;
+		width : 250px;
+	}
 
+	.resize {
+		height : auto;
+		height : 250px;
+	}
+	</style>
   </head>
   <body>
 
@@ -42,7 +55,7 @@ require "raininsert.php";
 			<h3>
 				氣象站
 			</h3>
-			<div class="jumbotron" style="background-color:#F0FFFF;">
+			<div class="jumbotron" style="background-image:url('./img/<?=$location?>.jpg');">
 				<h2>
 					臺灣各縣市
 				</h2>
@@ -101,8 +114,8 @@ require "raininsert.php";
 						<?php require "two.php"?>
 						<div class="row">
 						<div class="col-md-4">
-							<div class="card">
-								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg">
+						<img alt="sunny" src="weather/clound_sun.jpg" class="rounded resize" >
+							<div>
 								<div class="card-block">
 									<h5 class="card-title">
 										<?php echo $row["wx"];?>
@@ -120,8 +133,8 @@ require "raininsert.php";
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card">
-								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg">
+						<img alt="sunny" src="weather/sun_big.jpg" class="rounded resize" >
+							<div >
 								<div class="card-block">
 									<h5 class="card-title">
 										<?php echo $row_torm["wx"];?>
@@ -139,8 +152,8 @@ require "raininsert.php";
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="card">
-								<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg">
+						<img alt="sunny" src="weather/rain_night.jpg" class="rounded resize" >
+							<div>
 								<div class="card-block">
 									<h5 class="card-title">
 										<?php echo $row_acq["wx"];?>
