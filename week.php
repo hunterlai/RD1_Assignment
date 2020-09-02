@@ -1,5 +1,5 @@
 <?php
-// require("contodb.php");
+require("contodb.php");
 $location=$_SESSION["location"];
 for($x=0;$x<7;$x++){
     $week=date("Y-m-d H:i:s",strtotime("$x day"));

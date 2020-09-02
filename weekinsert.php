@@ -15,7 +15,7 @@ require_once("contodb.php");
 
     $ch = curl_init();
     $url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-B49B9DCF-7BB9-4300-8452-B146577EE1AE&elementName=WeatherDescription";
-
+    // $url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-B49B9DCF-7BB9-4300-8452-B146577EE1AE&elementName=WeatherDescription&locationName=$location";
 // 2. 設定 / 調整參數
 
     curl_setopt($ch, CURLOPT_URL,$url);

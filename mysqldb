@@ -6,7 +6,7 @@ create table city(
 
 INSERT INTO city (cityName) VALUES ("雲林縣"),("南投縣"),("連江縣"),("臺東縣"),("金門縣"),("宜蘭縣"),("屏東縣"),("苗栗縣"),("澎湖縣"),("臺北市"),("新竹縣"),("花蓮縣"),("高雄市"),("彰化縣"),("新竹市"),("新北市"),("基隆市"),("臺中市"),("臺南市"),("桃園市"),("嘉義縣"),("嘉義市");
 
-drop tabel twoday;
+drop table twoday;
 create table twoday (
     cityName varchar(10),
     startT datetime,

@@ -8,7 +8,7 @@
 
     $ch = curl_init();
     $url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=CWB-B49B9DCF-7BB9-4300-8452-B146577EE1AE&elementName=WeatherDescription";
-
+    // $url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=CWB-B49B9DCF-7BB9-4300-8452-B146577EE1AE&elementName=WeatherDescription&locarionName=$location";
 // 2. 設定 / 調整參數
 
     curl_setopt($ch, CURLOPT_URL,$url);
@@ -32,7 +32,7 @@
         $id=$row_city["cityId"];
         $find="select cityName,domain from twoday where cityName='$location'";
         $yes=mysqli_query($link,$find);
-        $row=mysqli_fetch_assoc($yes);
+        $row=@mysqli_fetch_assoc($yes);
 
         for($i=0;$i<24;$i++){
             

@@ -1,21 +1,45 @@
 <?php
 ini_set ( 'date.timezone' , 'Asia/Taipei' );  
 date_default_timezone_set('Asia/Taipei');
-
+require "contodb.php";
 session_start();
 
 
-$location="";
+$location="臺北市";
 $_SESSION["datetime"]=date("Y-m-d H:i:s");
+$two=date("Y-m-d H:i:s",strtotime("2 day"));
+$weekday=date("Y-m-d H:i:s",strtotime("6 day"));
+// echo $two;
 if(isset($_POST["location"])){
     $location = $_POST["location"];
     $_SESSION["location"]=$location;
 }else{
     $_SESSION["location"]="臺北市";
 }
-// require "insert.php";
-require "raininsert.php";
+$search="select startT,endT from twoday 
+where cityName='$location' and '$two' between startT and endT";
+// echo $search;
+$result_search=mysqli_query($link,$search);
+$row_search=@mysqli_fetch_assoc($result_search);
+if($two>$row_search["startT"] && $two<$row_search["endT"]){
+		echo "don't have to update! &nbsp";
+}else{
+	echo "update or inserting";
+	require "insert.php &nbsp";
+}
+$search_week="select startT,endT from week
+where cityName='$location' and '$weekday' between startT and endT";
+// echo $search_week;	
+$result_week=mysqli_query($link,$search_week);
+$row_forweek=@mysqli_fetch_assoc($result_week);
+if($weekday>$row_forweek["startT"] && $weekday<$row_forweek["endT"]){
+	 echo "week have already enter!";
+}else{
+	echo "update or inserting week data";
+	require "weekinsert.php";
+}
 // require "weekinsert.php";
+// require "raininsert.php";
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +80,7 @@ require "raininsert.php";
 				氣象站
 			</h3>
 			<div class="jumbotron" style="background-image:url('./img/<?=$location?>.jpg');">
-				<h2>
+				<h2 style="color:white;">
 					臺灣各縣市
 				</h2>
 				<form method="post">
@@ -94,29 +118,35 @@ require "raininsert.php";
 						<option <?php if($location== '澎湖縣'){echo "selected";}?> >澎湖縣</option>
 						</optgroup>
 					</select>
-					<button type="submit"><a href="rain.php">rain</a></button>
+					<button type="submit"><a href="rain.php" target="_blank">rain</a></button>
 					
 				</form>
 			</div>
+			
 			<div class="tabbable" >
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
 						<a class="nav-link active show" href="#tab1" data-toggle="tab">最近兩日</a>
-						
 					</li>
 					<li class="nav-item">
 						<a class="nav-link " href="#tab2" data-toggle="tab">未來一周</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " href="#tab3" data-toggle="tab">雨量</a>
 					</li>
 					
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="tab1" >
+						<p>
 						<?php require "two.php"?>
 						<div class="row">
-						<div class="col-md-4">
-						<img alt="sunny" src="weather/clound_sun.jpg" class="rounded resize" >
+							<div class="col-md-4">
+							<img alt="<?=$today?>" src="weather/<?=$today?>.jpg" class="rounded resize" >
 							<div>
 								<div class="card-block">
+									<h4>今日 <?php echo date("m/d");?></h4>
+									<hr>
 									<h5 class="card-title">
 										<?php echo $row["wx"];?>
 									</h5>
@@ -132,29 +162,33 @@ require "raininsert.php";
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4">
-						<img alt="sunny" src="weather/sun_big.jpg" class="rounded resize" >
-							<div >
-								<div class="card-block">
-									<h5 class="card-title">
-										<?php echo $row_torm["wx"];?>
-									</h5>
-									<p class="card-text">
-										<?php echo $row_torm["pop"];?>
-									</p>
-									<p class="card-text">
-										<?php echo $row_torm["t"];?>
-									</p>
-									<p class="card-text">
-										<?php echo $row_torm["ws"];?>
-									</p>
+							<div class="col-md-4">
+							<img alt="<?=$torm?>" src="weather/<?=$torm?>.jpg" class="rounded resize" >
+								<div >
+									<div class="card-block">
+										<h4>明日 <?php echo date("m/d",strtotime("1 day"));?></h4>
+										<hr>
+										<h5 class="card-title">
+											<?php echo $row_torm["wx"];?>
+										</h5>
+										<p class="card-text">
+											<?php echo $row_torm["pop"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_torm["t"];?>
+										</p>
+										<p class="card-text">
+											<?php echo $row_torm["ws"];?>
+										</p>
+									</div>
 								</div>
 							</div>
-						</div>
 						<div class="col-md-4">
-						<img alt="sunny" src="weather/rain_night.jpg" class="rounded resize" >
+						<img alt="<?=$acq?>" src="weather/<?=$acq?>.jpg" class="rounded resize" >
 							<div>
 								<div class="card-block">
+									<h4>後天 <?php echo date("m/d",strtotime("2 day"));?></h4>
+									<hr>
 									<h5 class="card-title">
 										<?php echo $row_acq["wx"];?>
 									</h5>
@@ -170,7 +204,7 @@ require "raininsert.php";
 								</div>
 							</div>
 						</div>
-						
+						</p>
 					</div>
 						
 					</div>
@@ -178,7 +212,7 @@ require "raininsert.php";
 						<p>
 							<?php require "week.php"?>
 							<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div class="card">
 									<div class="card-block">
 										<h5 class="card-title">
@@ -196,7 +230,7 @@ require "raininsert.php";
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div class="card">
 									<div class="card-block">
 										<h5 class="card-title">
@@ -214,7 +248,7 @@ require "raininsert.php";
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div class="card">
 									<div class="card-block">
 										<h5 class="card-title">
@@ -250,7 +284,7 @@ require "raininsert.php";
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="card">
 									<div class="card-block">
 										<h5 class="card-title">
@@ -268,7 +302,7 @@ require "raininsert.php";
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="card">
 									<div class="card-block">
 										<h5 class="card-title">
@@ -286,7 +320,7 @@ require "raininsert.php";
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="card">
 									<div class="card-block">
 										<h5 class="card-title">
@@ -305,11 +339,36 @@ require "raininsert.php";
 								</div>
 							</div>
 						</p>
-					</div>
-					
+					</div>	
 				</div>
-			</div>
-			
+				<div class="tab-pane" id="tab3">
+						<?php require "rain.php"?>
+						<p>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="card">
+									<div class="card-block">
+										<h5 class="card-title">
+											123
+											<?php
+											while($row=mysqli_fetch_assoc($result)){
+												if($row["rain"]==-998.00 ){
+													$row["rain"]=0.00;
+												}
+												if($row["hour_24"]==-999.00){
+													$row["hour_24"]=0.00;
+												}
+												echo $row["localName"]."&nbsp;區域：".$row["town"]."&nbsp;雨量:".$row["rain"]."&nbsp;24小時：".$row["hour_24"]."<br>";
+											}
+											?>
+										</h5>
+										
+									</div>
+								</div>
+							</div>
+						</p>
+						</div>
+				</div>
 		</div>
 	</div>
 </div>
