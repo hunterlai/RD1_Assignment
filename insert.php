@@ -40,7 +40,7 @@
             $end=$array["records"]["locations"][0]["location"][$id-1]["weatherElement"][0]["time"][$i]["endTime"];
             $narr = explode("。",$array["records"]["locations"][0]["location"][$id-1]["weatherElement"][0]["time"][$i]["elementValue"][0]["value"]);
             // echo $location.$id.$row["cityName"].$row["domain"]."<br>";
-            if($row["cityName"]==$location && $row["domain"] != ""){
+            if(@$row["cityName"]==$location && @$row["domain"] != ""){
                 // if($i>21){
                 //     $wear_update="update twoday set startT='$start', endT='$end',
                 //     wx='$narr[0]',t='$narr[1]', ci='$narr[2]', ws='$narr[3]', rh='$narr[4]' where domain=$i and cityName='$location'";

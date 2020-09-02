@@ -21,18 +21,18 @@ where cityName='$location' and '$two' between startT and endT";
 // echo $search;
 $result_search=mysqli_query($link,$search);
 $row_search=@mysqli_fetch_assoc($result_search);
-if($two>$row_search["startT"] && $two<$row_search["endT"]){
+if($two>@$row_search["startT"] && $two<@$row_search["endT"]){
 		echo "don't have to update! &nbsp";
 }else{
-	echo "update or inserting";
-	require "insert.php &nbsp";
+	echo "update or inserting &nbsp";
+	require "insert.php ";
 }
 $search_week="select startT,endT from week
 where cityName='$location' and '$weekday' between startT and endT";
 // echo $search_week;	
 $result_week=mysqli_query($link,$search_week);
 $row_forweek=@mysqli_fetch_assoc($result_week);
-if($weekday>$row_forweek["startT"] && $weekday<$row_forweek["endT"]){
+if($weekday>@$row_forweek["startT"] && $weekday<@$row_forweek["endT"]){
 	 echo "week have already enter!";
 }else{
 	echo "update or inserting week data";
@@ -50,12 +50,26 @@ if($weekday>$row_forweek["startT"] && $weekday<$row_forweek["endT"]){
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Weather</title>
-
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
-
+	
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+	<script type="text/javascript" src="./jquery.min.js"></script>
+	<script type="text/javascript">
+        $(document).ready(test);
+
+        function test(){
+            $("#tableSearch").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#myTable tr").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+        }
+
+    </script>
+	
 	<style type="text/css">
 	.jumbotron{
 		padding:10rem 2rem;
@@ -70,6 +84,11 @@ if($weekday>$row_forweek["startT"] && $weekday<$row_forweek["endT"]){
 		height : 250px;
 	}
 	</style>
+
+	
+
+	
+
   </head>
   <body>
 
@@ -118,7 +137,7 @@ if($weekday>$row_forweek["startT"] && $weekday<$row_forweek["endT"]){
 						<option <?php if($location== '澎湖縣'){echo "selected";}?> >澎湖縣</option>
 						</optgroup>
 					</select>
-					<button type="submit"><a href="rain.php" target="_blank">rain</a></button>
+					<button type="submit" id="test">123</button>
 					
 				</form>
 			</div>
@@ -344,35 +363,46 @@ if($weekday>$row_forweek["startT"] && $weekday<$row_forweek["endT"]){
 				<div class="tab-pane" id="tab3">
 						<?php require "rain.php"?>
 						<p>
-						<div class="row">
-							<div class="col-md-3">
-								<div class="card">
-									<div class="card-block">
-										<h5 class="card-title">
-											123
-											<?php
-											while($row=mysqli_fetch_assoc($result)){
+						<div class="container">
+							<input class="form-control mb-4" id="tableSearch" type="text"
+								placeholder="Type something to search list items">
+
+							<table class="table table-bordered table-striped">
+								<thead>
+								<tr>
+									<th>localName</th>
+									<th>town</th>
+									<th>rain</th>
+									<th>hour_24</th>
+								</tr>
+								</thead>
+								<tbody id="myTable">
+								<?php while($row=mysqli_fetch_assoc($result)){ 
 												if($row["rain"]==-998.00 ){
 													$row["rain"]=0.00;
 												}
 												if($row["hour_24"]==-999.00){
 													$row["hour_24"]=0.00;
 												}
-												echo $row["localName"]."&nbsp;區域：".$row["town"]."&nbsp;雨量:".$row["rain"]."&nbsp;24小時：".$row["hour_24"]."<br>";
-											}
-											?>
-										</h5>
-										
-									</div>
-								</div>
-							</div>
+												?>
+								<tr>
+									<td><?=$row["localName"]?></td>
+									<td><?=$row["town"]?></td>
+									<td><?=$row["rain"]?></td>
+									<td><?=$row["hour_24"]?></td>
+								</tr>
+											<?php } ?>
+								</tbody>
+							</table>
+						</div>
+							
 						</p>
 						</div>
 				</div>
 		</div>
 	</div>
 </div>
-
+											
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
