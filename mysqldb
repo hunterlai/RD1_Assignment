@@ -1,3 +1,5 @@
+create database weather;
+
 create table city( 
     cityId int auto_increment primary key NOT null,
      cityName varchar(10),

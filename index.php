@@ -22,10 +22,11 @@ where cityName='$location' and '$two' between startT and endT";
 $result_search=mysqli_query($link,$search);
 $row_search=@mysqli_fetch_assoc($result_search);
 if($two>@$row_search["startT"] && $two<@$row_search["endT"]){
-		echo "don't have to update! &nbsp";
+		// echo "don't have to update! &nbsp";
 }else{
 	echo "update or inserting &nbsp";
-	require "insert.php ";
+	require "insert.php";
+	header("location index.php");
 }
 $search_week="select startT,endT from week
 where cityName='$location' and '$weekday' between startT and endT";
@@ -33,10 +34,11 @@ where cityName='$location' and '$weekday' between startT and endT";
 $result_week=mysqli_query($link,$search_week);
 $row_forweek=@mysqli_fetch_assoc($result_week);
 if($weekday>@$row_forweek["startT"] && $weekday<@$row_forweek["endT"]){
-	 echo "week have already enter!";
+	//  echo "week have already enter!";
 }else{
 	echo "update or inserting week data";
 	require "weekinsert.php";
+	header("location index.php");
 }
 // require "weekinsert.php";
 // require "raininsert.php";
@@ -137,7 +139,6 @@ if($weekday>@$row_forweek["startT"] && $weekday<@$row_forweek["endT"]){
 						<option <?php if($location== '澎湖縣'){echo "selected";}?> >澎湖縣</option>
 						</optgroup>
 					</select>
-					<button type="submit" id="test">123</button>
 					
 				</form>
 			</div>
