@@ -1,7 +1,8 @@
 <?php
 // @session_start();
 // $location=$_SESSION["location"];
-require_once("contodb.php");
+require("contodb.php");
+$date=date("Y-m-d");
 $dele="delete from rain";
 $trash=mysqli_query($link,$dele);
 // 1. 初始設定
@@ -35,9 +36,8 @@ $trash=mysqli_query($link,$dele);
         $local_hour_24=$array["records"]["location"][$x]["weatherElement"][1]["elementValue"];
         
         // echo $x.$local_name."C=".$local_city."T=".$local_town."R=".$local_rain."H=".$local_hour_24."<br>";
-        $sql="insert into rain values('$local_city','$local_name','$local_town',$local_rain,$local_hour_24);";
+        $sql="insert into rain values('$local_city','$local_name','$local_town',$local_rain,$local_hour_24,'$date');";
         $result=mysqli_query($link,$sql);
-        
     }
 
 // echo $array["records"]["locations"][0]["location"][0]["weatherElement"][0]["time"][0]["elementValue"][0]["value"];

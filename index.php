@@ -7,6 +7,7 @@ session_start();
 
 $location="臺北市";
 $_SESSION["datetime"]=date("Y-m-d H:i:s");
+$date=date("Y-m-d");
 $two=date("Y-m-d H:i:s",strtotime("2 day"));
 $weekday=date("Y-m-d H:i:s",strtotime("6 day"));
 // echo $two;
@@ -41,7 +42,13 @@ if($weekday>@$row_forweek["startT"] && $weekday<@$row_forweek["endT"]){
 	header("location index.php");
 }
 // require "weekinsert.php";
-// require "raininsert.php";
+$search_rain="select today from rain";
+$result_rain=mysqli_query($link,$search_rain);
+$row_rain=@mysqli_fetch_assoc($result_rain);
+if($row_rain["today"]!=$date){
+	require "raininsert.php";
+}
+
 ?>
 
 <!DOCTYPE html>
