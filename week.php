@@ -95,7 +95,7 @@ switch($row_1["wx"]){
     case '陰短暫陣雨':
         $w1="rain";
     break;
-    case '情午後短暫雷陣雨':
+    case '晴午後短暫雷陣雨':
         $w1="thunder_rain";
     break;
     case '多雲午後短暫雷陣雨':
@@ -127,7 +127,7 @@ switch($row_2["wx"]){
     case '陰短暫陣雨':
         $w2="rain";
     break;
-    case '情午後短暫雷陣雨':
+    case '晴午後短暫雷陣雨':
         $w2="thunder_rain";
     break;
     case '多雲午後短暫雷陣雨':
@@ -159,7 +159,7 @@ switch($row_3["wx"]){
     case '陰短暫陣雨':
         $w3="rain";
     break;
-    case '情午後短暫雷陣雨':
+    case '晴午後短暫雷陣雨':
         $w3="thunder_rain";
     break;
     case '多雲午後短暫雷陣雨':
