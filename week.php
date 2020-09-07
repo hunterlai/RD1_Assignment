@@ -72,6 +72,9 @@ switch($row_0["wx"]){
     case '多雲短暫陣雨或雷雨':
         $w0="thunder_rain";
     break;
+    case '多雲時陰短暫陣雨或雷雨':
+        $w0="thunder_rain";
+    break;
 }
 switch($row_1["wx"]){
     case '晴':
@@ -105,6 +108,9 @@ switch($row_1["wx"]){
         $w1="thunder_rain";
     break;
     case '多雲短暫陣雨或雷雨':
+        $w1="thunder_rain";
+    break;
+    case '多雲時陰短暫陣雨或雷雨':
         $w1="thunder_rain";
     break;
 }
@@ -142,6 +148,9 @@ switch($row_2["wx"]){
     case '多雲短暫陣雨或雷雨':
         $w2="thunder_rain";
     break;
+    case '多雲時陰短暫陣雨或雷雨':
+        $w2="thunder_rain";
+    break;
 }
 switch($row_3["wx"]){
     case '晴':
@@ -175,6 +184,9 @@ switch($row_3["wx"]){
         $w3="thunder_rain";
     break;
     case '多雲短暫陣雨或雷雨':
+        $w3="thunder_rain";
+    break;
+    case '多雲時陰短暫陣雨或雷雨':
         $w3="thunder_rain";
     break;
 }
@@ -212,6 +224,9 @@ switch($row_4["wx"]){
     case '多雲短暫陣雨或雷雨':
         $w4="thunder_rain";
     break;
+    case '多雲時陰短暫陣雨或雷雨':
+        $w4="thunder_rain";
+    break;
 }
 switch($row_5["wx"]){
     case '晴':
@@ -247,6 +262,9 @@ switch($row_5["wx"]){
     case '多雲短暫陣雨或雷雨':
         $w5="thunder_rain";
     break;
+    case '多雲時陰短暫陣雨或雷雨':
+        $w5="thunder_rain";
+    break;
 }
 switch($row_6["wx"]){
     case '晴':
@@ -280,6 +298,9 @@ switch($row_6["wx"]){
         $w6="thunder_rain";
     break;
     case '多雲短暫陣雨或雷雨':
+        $w6="thunder_rain";
+    break;
+    case '多雲時陰短暫陣雨或雷雨':
         $w6="thunder_rain";
     break;
 }
