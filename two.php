@@ -37,9 +37,13 @@ switch($row["wx"]){
     case '短暫陣雨或雷雨':
         $today="thunder_rain";
     break;
+    case '午後短暫雷陣雨':
+        $today="thunder_rain";
+    break;
     case '短暫陣雨':
         $today="rain";
     break;
+
 
 }
 switch($row_torm["wx"]){
@@ -56,6 +60,9 @@ switch($row_torm["wx"]){
         $torm="clound";
     break;
     case '短暫陣雨或雷雨':
+        $torm="thunder_rain";
+    break;
+    case '午後短暫雷陣雨':
         $torm="thunder_rain";
     break;
     case '短暫陣雨':
@@ -76,6 +83,9 @@ switch($row_acq["wx"]){
         $acq="clound";
     break;
     case '短暫陣雨或雷雨':
+        $acq="thunder_rain";
+    break;
+    case '午後短暫雷陣雨':
         $acq="thunder_rain";
     break;
     case '短暫陣雨':

@@ -368,10 +368,10 @@ if($row_rain["today"]!=$date){
 								</thead>
 								<tbody id="myTable">
 								<?php while($row=mysqli_fetch_assoc($result)){ 
-												if($row["rain"]==-998.00 ){
+												if($row["rain"]==-998.00 || $row["rain"]==-999.00){
 													$row["rain"]=0.00;
 												}
-												if($row["hour_24"]==-999.00){
+												if($row["hour_24"]==-999.00 ||$row["hour_24"]==-998.00){
 													$row["hour_24"]=0.00;
 												}
 												?>
