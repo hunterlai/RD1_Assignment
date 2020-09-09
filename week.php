@@ -38,7 +38,7 @@ for($x=0;$x<7;$x++){
 
     }
 }
-switch($row_0["wx"]){
+switch(@$row_0["wx"]){
     case '晴':
         $w0="sun";
     break;

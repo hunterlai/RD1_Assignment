@@ -203,22 +203,22 @@ if($row_rain["today"]!=$date){
 						<?php require "two.php"?>
 						<div class="row">
 							<div class="col-md-4">
-							<img alt="<?=$today?>" src="weather/<?=$today?>.jpg" class="rounded resize" >
+							<img src="weather/<?php if(!isset($today)){echo 404;}else{echo $today;}?>.jpg" class="rounded resize" >
 							<div>
 								<div class="card-block">
 									<h4 >今日 <?php echo date("m/d");?></h4>
 									<hr>
 									<h5 class="card-title">
-										<?php if($row["wx"]==null){echo "沒有資訊";}else{echo $row["wx"];} ?>
+										<?php if(@$row["wx"]==null){echo "沒有資訊";}else{echo $row["wx"];} ?>
 									</h5>
 									<p class="card-text">
-										<?php if($row["pop"]==null){echo "沒有資訊";}else{echo $row["pop"];} ?>
+										<?php if(@$row["pop"]==null){echo "沒有資訊";}else{echo $row["pop"];} ?>
 									</p>
 									<p class="card-text">
-										<?php if($row["t"]==null){echo "沒有資訊";}else{echo $row["t"];} ?>
+										<?php if(@$row["t"]==null){echo "沒有資訊";}else{echo $row["t"];} ?>
 									</p>
 									<p class="card-text">
-										<?php if($row["ws"]==null){echo "沒有資訊";}else{echo $row["ws"];} ?>
+										<?php if(@$row["ws"]==null){echo "沒有資訊";}else{echo $row["ws"];} ?>
 									</p>
 								</div>
 							</div>
@@ -287,12 +287,12 @@ if($row_rain["today"]!=$date){
 									</thead>
 									<tbody>
 									<tr>
-										<td><img alt="<?=$w0?>" src="weather/<?=$w0?>.jpg" class="rounded resize_week" ></td>
+										<td><img  src="weather/<?php if(!isset($w0)){echo 404;}else{echo $w0;}?>.jpg" class="rounded resize_week" ></td>
 										<td><?=date("m-d");?></td>
-										<td><?=$row_0["wx"]?></td>
-										<td><?=$row_0["pop"]?></td>
-										<td><?=$row_0["t"]?></td>
-										<td><?=$row_0["ci"]?></td>
+										<td><?php if(!isset($row_0["wx"])){echo "沒有資訊";}else{echo $row_0["wx"];}?></td>
+										<td><?php if(!isset($row_0["pop"])){echo "沒有資訊";}else{echo $row_0["pop"];}?></td>
+										<td><?php if(!isset($row_0["t"])){echo "沒有資訊";}else{echo $row_0["t"];}?></td>
+										<td><?php if(!isset($row_0["ci"])){echo "沒有資訊";}else{echo $row_0["ci"];}?></td>
 									</tr>
 									<tr>
 										<td><img alt="<?=$w1?>" src="weather/<?=$w1?>.jpg" class="rounded resize_week" ></td>

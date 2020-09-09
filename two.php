@@ -21,7 +21,7 @@ where cityName='$location' and '$acqd' between startT and endT";
 $result_acq=mysqli_query($link,$select_acq);
 $row_acq=mysqli_fetch_assoc($result_acq);
 
-switch($row["wx"]){
+switch(@$row["wx"]){
     case '晴':
         $today="sun";
     break;
